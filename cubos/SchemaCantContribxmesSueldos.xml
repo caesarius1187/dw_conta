@@ -1,0 +1,28 @@
+<Schema name="ContribuyentesSueldos">
+  <Dimension type="StandardDimension" visible="true" name="dwcontribuyentes">
+    <Hierarchy name="dwcontribuyentes" visible="true" hasAll="true">
+      <Table name="dwcontribuyentes" schema="public">
+      </Table>
+      <Level name="contribuyente" visible="true" table="dwcontribuyentes" column="id" nameColumn="name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="dwperiodo">
+    <Hierarchy name="periodo" visible="true" hasAll="true" primaryKey="periodo">
+      <Table name="dwtiempos" schema="public" alias="">
+      </Table>
+      <Level name="periodo" visible="true" table="dwtiempos" column="periodo" nameColumn="periodo" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="cuboContribuyentesSueldos" visible="true" cache="true" enabled="true">
+    <Table name="dwsueldos" schema="public" alias="dwsueldos">
+    </Table>
+    <DimensionUsage source="dwcontribuyentes" name="dwcontribuyentes" visible="true" foreignKey="dwcontribuyente_id">
+    </DimensionUsage>
+    <DimensionUsage source="dwperiodo" name="dwtiempos" visible="true" foreignKey="periodo">
+    </DimensionUsage>
+    <Measure name="cantOperaciones" column="cantempleados" datatype="Numeric" aggregator="distinct-count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
