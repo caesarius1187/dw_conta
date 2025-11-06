@@ -1,5 +1,5 @@
 <Schema name="ContribuyentesSueldos">
-  <Dimension type="StandardDimension" visible="true" name="dwcontribuyentes">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dwcontribuyentes">
     <Hierarchy name="dwcontribuyentes" visible="true" hasAll="true">
       <Table name="dwcontribuyentes" schema="public">
       </Table>
@@ -7,22 +7,36 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="dwperiodo">
-    <Hierarchy name="periodo" visible="true" hasAll="true" primaryKey="periodo">
-      <Table name="dwtiempos" schema="public" alias="">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dwperiodo">
+    <Hierarchy name="periodofecha" visible="true" hasAll="true" primaryKey="periodofecha">
+      <Table name="dwtiempos" schema="public">
       </Table>
-      <Level name="periodo" visible="true" table="dwtiempos" column="periodo" nameColumn="periodo" type="String" uniqueMembers="false">
+      <Level name="periodofecha" visible="true" table="dwtiempos" column="periodofecha" nameColumn="periodofecha" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="anio" visible="true" table="dwtiempos" column="anio" ordinalColumn="anio" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never" captionColumn="anio">
+      </Level>
+      <Level name="mes" visible="true" table="dwtiempos" column="mes" nameColumn="mes" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dwestudios">
+    <Hierarchy name="dwestudios" visible="true" hasAll="true">
+      <Table name="dwestudios" schema="public">
+      </Table>
+      <Level name="estudios" visible="true" table="dwestudios" column="id" nameColumn="nombre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
   <Cube name="cuboContribuyentesSueldos" visible="true" cache="true" enabled="true">
     <Table name="dwsueldos" schema="public" alias="dwsueldos">
     </Table>
-    <DimensionUsage source="dwcontribuyentes" name="dwcontribuyentes" visible="true" foreignKey="dwcontribuyente_id">
+    <DimensionUsage source="dwcontribuyentes" name="dwcontribuyentes" visible="true" foreignKey="dwcontribuyente_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="dwperiodo" name="dwtiempos" visible="true" foreignKey="periodo">
+    <DimensionUsage source="dwperiodo" name="dwtiempos" visible="true" foreignKey="periodofecha" highCardinality="false">
     </DimensionUsage>
-    <Measure name="cantOperaciones" column="cantempleados" datatype="Numeric" aggregator="distinct-count" visible="true">
+    <DimensionUsage source="dwestudios" name="dwestudios" visible="true" foreignKey="dwestudio_id" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="sumempleados" column="cantempleados" aggregator="sum" visible="true">
     </Measure>
   </Cube>
 </Schema>
