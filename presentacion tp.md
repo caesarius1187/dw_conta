@@ -47,22 +47,24 @@ Se desea conocer cuál es la funcionalidad estrella en CONTA y en qué punto deb
 Desarrollo de la Solución
 Se diseñaran los siguientes esquemas, según los diferentes módulos de CONTA:
 
-***Previsional***
+*Previsional*
 Cantidad de contribuyentes por estudio y por mes que calculan sueldos.
 Cantidad de contribuyentes por estudio y por mes que calculan SUSS.
 Libro Sueldo Digital: agregar un registro en CONTA que indique cuándo se utiliza esta función.
-***Impositivo***
+*Impositivo*
 Cantidad de contribuyentes por estudio y por mes que cargan ventas.
 Cantidad de contribuyentes por estudio y por mes que cargan compras.
 Cantidad de contribuyentes por estudio y por mes que liquidan IVA.
 Cantidad de contribuyentes por estudio y por mes que liquidan Monotributo.
-***Contable***
+*Contable*
 Asientos de ventas por mes por estudio contable.
 Asientos de compras por mes por estudio contable.
 Asientos de impuestos por mes por estudio contable.
 Asientos de estados contables por año por estudio contable.
 
-**De la Base Transaccional al Análisis Estratégico**
+**Desarrollo de la solucion**
+
+A continuacion se detallan los pasos seguidos para la solucion de: *Cantidad de contribuyentes por estudio y por mes que calculan sueldos* del módulo Previsional, que se tomo como muestra de como se deberian trabajar todas las soluciones.
 
 Nuestro proyecto comenzó con un desafío común pero crítico: teníamos una base de datos operativa de CONTA repleta de información valiosa, pero también cargada con datos sensibles de clientes reales. El primer paso fue proteger esta información. Realizamos una exportación completa de la base de datos y procedimos a un meticuloso proceso de limpieza, eliminando y anonimizando todos los datos de clientes reales. Solo conservamos la información de prueba necesaria para construir una prueba de concepto sólida y representativa.
 
@@ -78,6 +80,6 @@ La etapa final nos llevó a Workbench, donde construimos un cubo OLAP que encaps
 
 Como conclusión, comenzando desde una base de datos transaccional se logro obtener un sistema de inteligencia de negocios, listo para generar insights y apoyar la toma de decisiones estratégicas.
 
-Adjunto a este documento encontraran los archivos relacionados a las transformaciones, la bases de datos original y el data warehouse, el diagrama de entidad relacion
+Todos los archivos utilizados y mencionados en esta prensentacion estan disponibles en repositorio https://github.com/caesarius1187/dw_conta.
 
 
